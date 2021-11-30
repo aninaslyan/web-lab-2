@@ -1,5 +1,3 @@
-// export type Observer = (T: string) => void;
-
 export interface IObserver {
     // Receive update from observable.
     update(observable: IObservable, data: string): void;

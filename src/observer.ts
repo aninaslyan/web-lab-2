@@ -1,12 +1,13 @@
-import { IObservable, IObserver } from "../interfaces";
+import { Observable } from "./observable";
 
-class Observer implements IObserver {
+import { IObservable, IObserver } from "./interfaces/interfaces";
+
+export class Observer implements IObserver {
     constructor(
         private subscription: (data: string) => void,
     ) { }
 
     public update(observable: IObservable, data: string): void {
-        // @ts-ignore
         if (observable instanceof Observable) {
             console.log('Observer: Reacted to the event.');
             this.subscription(data);

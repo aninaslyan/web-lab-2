@@ -1,6 +1,6 @@
-import { IObserver, IObservable } from '../interfaces';
+import { IObserver, IObservable } from './interfaces/interfaces';
 
-class Observable implements IObservable {
+export class Observable implements IObservable {
     public observers: IObserver[] = [];
 
     constructor() { }

@@ -1,4 +1,8 @@
-import { IObserver } from '../interfaces';
+import { Observable } from "./observable";
+import { Observer } from './observer';
+import { changeTextContent  } from './utils/utils'
+
+import { IObserver } from './interfaces/interfaces';
 
 /* Selecting existing Elements */
 
@@ -23,21 +27,17 @@ const unsubscribeP3Btn = document.querySelector('.button-unsubscribe-p3');
 /* Creating Subscriptions */
 
 const updateP1SubscriptionFn = (text: string) => changeTextContent(text, p1Element);
-// @ts-ignore
 const updateP1Observer: IObserver = new Observer(updateP1SubscriptionFn);
 
 const updateP2SubscriptionFn = (text: string) => changeTextContent(text, p2Element);
-// @ts-ignore
 const updateP2Observer: IObserver = new Observer(updateP2SubscriptionFn);
 
 const updateP3SubscriptionFn = (text: string) => changeTextContent(text, p3Element);
-// @ts-ignore
 const updateP3Observer: IObserver = new Observer(updateP3SubscriptionFn);
 
 
 /* Observable instance */
 
-// @ts-ignore
 const observerList = new Observable();
 observerList.subscribe(updateP1Observer);
 observerList.subscribe(updateP2Observer);
