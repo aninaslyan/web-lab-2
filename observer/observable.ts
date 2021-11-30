@@ -1,24 +1,34 @@
-import { Observer } from '../types';
+import { IObserver, IObservable } from '../interfaces';
 
-class Observable { // todo implements
-    public observers: Array<Observer> = [];
+class Observable implements IObservable {
+    public observers: IObserver[] = [];
 
-    constructor() {
+    constructor() { }
+
+    public subscribe(observer: IObserver): void {
+        if (this.observers.includes(observer)) {
+            console.log('This observer has been already attached');
+            return;
+        }
+
+        this.observers.push(observer);
     }
 
-    public subscribe(f: Observer) {
-        this.observers.push(f);
-    }
+    public unsubscribe(observer: IObserver): void {
+        const observerIndex = this.observers.indexOf(observer);
+        if (observerIndex === -1) {
+            console.log('This observer doesn\'t exist');
+            return;
+        }
 
-    public unsubscribe(f: Observer) {
         this.observers.forEach((subscriber, index) => {
-            if (subscriber === f) {
+            if (subscriber === observer) {
                 this.observers.splice(index, 1);
             }
         })
     }
 
-    public notify(data: string) {
-        this.observers.forEach(observer => observer(data));
+    public notify(data: string): void {
+        this.observers.forEach(observer => observer.update(this, data));
     }
 }
