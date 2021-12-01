@@ -21,11 +21,7 @@ export class Observable implements IObservable {
             return;
         }
 
-        this.observers.forEach((subscriber, index) => {
-            if (subscriber === observer) {
-                this.observers.splice(index, 1);
-            }
-        })
+        this.observers.splice(observerIndex, 1);
     }
 
     public notify(data: string): void {
